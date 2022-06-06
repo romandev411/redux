@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux'
+import { increment, decrement, changeStep } from './actions/actionCreator'
 
-function App() {
+function App (props) {
+  const inc = () => {
+    props.increment()
+  }
+
+  const dec = () => {
+    props.decrement()
+  }
+
+  const inputChange = e => {
+    props.changeStep(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <button onClick={inc}>+</button>
+      {props.count}
+      <button onClick={dec}>-</button>
+      <input type='number' value={props.step} onChange={inputChange} />
+      {props.step}
     </div>
-  );
+  )
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    count: state.count,
+    step: state.step
+  }
+}
+
+const wrappedApp = connect(mapStateToProps, {
+  increment,
+  decrement,
+  changeStep
+})(App)
+
+export default wrappedApp
