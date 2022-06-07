@@ -1,21 +1,10 @@
-import { ACTION_TYPES } from '../actions/actionTypes'
+import countReducer from './countReducer'
+import todoReducer from './todoReducer'
+import { combineReducers } from 'redux'
 
-const initState = {
-  count: 0,
-  step: 1
-}
+const rootReducer = combineReducers({
+  count: countReducer,
+  todo: todoReducer
+})
 
-export const reducer = (state = initState, action) => {
-  switch (action.type) {
-    case ACTION_TYPES.INCREMENT: {
-      return { ...state, count: state.count + state.step }
-    }
-    case ACTION_TYPES.DECREMENT: {
-      return { ...state, count: state.count - state.step }
-    }
-    case ACTION_TYPES.STEP: {
-      return { ...state, step: action.value }
-    }
-  }
-  return { ...state }
-}
+export default rootReducer

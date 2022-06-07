@@ -18,3 +18,27 @@ export const changeStep = value => {
     value
   }
 }
+
+/////////
+
+export const createTodo = value => {
+  return {
+    type: ACTION_TYPES.CREATE_TODO,
+    value
+  }
+}
+
+export const updateTodo = ({ id, value }) => {
+  return {
+    type: ACTION_TYPES.UPDATE_TODO,
+    value,
+    id
+  }
+}
+
+export const deleteTodo = id => {
+  return {
+    type: ACTION_TYPES.DELETE_TODO,
+    id
+  }
+}
